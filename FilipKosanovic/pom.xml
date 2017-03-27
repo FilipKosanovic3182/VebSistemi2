@@ -12,13 +12,22 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.3.0.RELEASE</spring.version> 
+        <spring.version>4.3.0.RELEASE</spring.version>
+        <jdk.version>1.6</jdk.version>
         <jstl.version>1.2</jstl.version> 
         <javax.servlet.version>3.0.1</javax.servlet.version>
+        <spring.security.version>3.2.3.RELEASE</spring.security.version>
+        <mysql.connector.version>5.1.30</mysql.connector.version>
     </properties>
 
     
     <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.11</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -26,46 +35,50 @@
             <scope>provided</scope>
         </dependency>
         <dependency> 
-            <groupId>org.springframework</groupId>
+            <groupId>org.springframework</groupId> 
             <artifactId>spring-core</artifactId> 
             <version>${spring.version}</version> 
         </dependency>
-    <dependency> 
-        <groupId>org.springframework</groupId> 
-        <artifactId>spring-web</artifactId> 
-        <version>${spring.version}</version> 
-    </dependency>
-    <dependency> 
-        <groupId>org.springframework</groupId> 
-        <artifactId>spring-webmvc</artifactId> 
-        <version>${spring.version}</version> 
-    </dependency>
-    <dependency> 
-        <groupId>javax.servlet</groupId> 
-        <artifactId>javax.servlet-api</artifactId> 
-        <version>${javax.servlet.version}</version> 
-        <scope>provided</scope> 
-    </dependency>
-    <dependency> 
-        <groupId>jstl</groupId> 
-        <artifactId>jstl</artifactId> 
-        <version>${jstl.version}</version> 
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId> 
-        <artifactId>spring-aop</artifactId> 
-        <version>${spring.version}</version> 
-    </dependency>
-    <dependency> 
-        <groupId>org.aspectj</groupId> 
-        <artifactId>aspectjrt</artifactId> 
-        <version>1.6.11</version> 
-    </dependency>
-    <dependency> 
-        <groupId>org.aspectj</groupId> 
-        <artifactId>aspectjweaver</artifactId> 
-        <version>1.6.11</version> 
-    </dependency>
+        <dependency> 
+            <groupId>org.springframework</groupId> 
+            <artifactId>spring-web</artifactId> 
+            <version>${spring.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>org.springframework</groupId> 
+            <artifactId>spring-webmvc</artifactId> 
+            <version>${spring.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>org.springframework</groupId> 
+            <artifactId>spring-jdbc</artifactId> 
+            <version>${spring.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>org.springframework.security</groupId> 
+            <artifactId>spring-security-web</artifactId> 
+            <version>${spring.security.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>org.springframework.security</groupId> 
+            <artifactId>spring-security-config</artifactId> 
+            <version>${spring.security.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>org.springframework.security</groupId> 
+            <artifactId>spring-security-taglibs</artifactId> 
+            <version>${spring.security.version}</version> 
+        </dependency>
+        <dependency> 
+            <groupId>jstl</groupId> 
+            <artifactId>jstl</artifactId> 
+            <version>${jstl.version}</version>
+        </dependency>
+        <dependency> 
+            <groupId>mysql</groupId> 
+            <artifactId>mysql-connector-java</artifactId> 
+            <version>${mysql.connector.version}</version> 
+        </dependency>
 
     </dependencies>
 
