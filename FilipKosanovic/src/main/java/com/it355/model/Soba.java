@@ -5,21 +5,26 @@
  */
 package com.it355.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Filip Wolve
  */
-public class Soba {
+@SuppressWarnings("serial")
+public class Soba implements Serializable{
     private Integer brKreveta;
     private Integer velicina;
     private Boolean kupatilo;
     private Boolean tv;
     private Boolean klima;
     private Double cena;
+    private Integer id;
     
     public Soba(){}
     
-    public Soba(Integer brKreveta, Integer velicina, Boolean kupatilo, Boolean tv, Boolean klima, Double cena){
+    public Soba(Integer id, Integer brKreveta, Integer velicina, Boolean kupatilo, Boolean tv, Boolean klima, Double cena){
+        this.id = id;
         this.brKreveta = brKreveta;
         this.velicina = velicina;
         this.kupatilo = kupatilo;
@@ -28,6 +33,14 @@ public class Soba {
         this.cena = cena;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     public Integer getBrKreveta() {
         return brKreveta;
     }

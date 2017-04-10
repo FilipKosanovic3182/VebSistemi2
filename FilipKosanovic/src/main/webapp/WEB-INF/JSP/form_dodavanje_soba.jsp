@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form:form method="POST" action="/FilipKosanovic/addRoom">
+        <form:form method="POST" action="addRoom" modelAttribute="soba" >
             <table>
                 <tr>
                     <td><form:label path="brKreveta"><spring:message code="soba.brKreveta"/></form:label></td>

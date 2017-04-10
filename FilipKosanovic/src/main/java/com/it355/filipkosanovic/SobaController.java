@@ -5,6 +5,8 @@
  */
 package com.it355.filipkosanovic;
 
+import com.it355.dao.RezervacijaDao;
+import com.it355.dao.SobaDao;
 import com.it355.dodaj.SobaDodaj;
 import com.it355.model.Soba;
 import com.it355.model.*;
@@ -28,15 +30,44 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SobaController {
     
+    @Autowired
+    private SobaDao sobaDao;
+    
+    @Autowired
+    private RezervacijaDao rezervacijaDao;
+    
     @Autowired 
     private SobaDodaj sobaDodaj;
+    
 
+    @RequestMapping( value ="/dodajRezervaciju", method = RequestMethod.GET)
+    public ModelAndView formRezervacijaAdd(ModelAndView model){
+        model.addObject("rezervacija", new Rezervacija());
+        model.setViewName("form_dodavanje_rez_Controller");
+        return model;
+        //return new ModelAndView("form_dodavanje_soba", "command", new Soba());
+    }
+    
+    @RequestMapping(value = "/prikaziDodajRezervaciju", method = RequestMethod.POST)
+    public ModelAndView addRezervacija(@ModelAttribute("rezervacija") Rezervacija rez, ModelAndView model) {
+        model.addObject("object", rez); 
+        rez.setId(rezervacijaDao.getCount()+1); 
+        rezervacijaDao.addRezervacija(rez);
+        model.setViewName("prikazDodateRez_Controller");
+        return model;
+    }
+    
+    
     
     @RequestMapping( value ="/dodajSobu", method = RequestMethod.GET)
-    public ModelAndView formaSoba(){
+    public ModelAndView formaSoba(ModelAndView model){
         System.out.println("Dodajemo sobu!");
         sobaDodaj.addSoba();
-        return new ModelAndView("form_dodavanje_soba", "command", new Soba());
+        model.addObject("soba", new Soba());
+        model.setViewName("form_dodavanje_soba");
+        model.addObject("command");
+        return model;
+        //return new ModelAndView("form_dodavanje_soba", "command", new Soba());
     }
     
     @RequestMapping(value = "/addRoom", method = RequestMethod.POST)
@@ -48,16 +79,20 @@ public class SobaController {
         model.addAttribute("tv", soba.getTv());
         model.addAttribute("klima", soba.getKlima());
         model.addAttribute("cena", soba.getCena());
+        soba.setId(sobaDao.getCount()+1);
+        sobaDao.addSoba(soba);
         sobaDodaj.addSoba();
         return "prikazDodateSobe";
     }
     
     @RequestMapping(value = {"/"}, method = RequestMethod.GET) public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView(); 
+        System.out.println("Ne izbacuje nista");
         model.addObject("message", "Ovo je strana kojoj svi mogu da pristupe!"); 
         model.setViewName("hello"); 
         return model;
     }
+
     @RequestMapping(value = "/admin**", method = RequestMethod.GET) public ModelAndView adminPage() {
         ModelAndView model = new ModelAndView(); 
         model.addObject("message", "Ovo je strana za admine!"); 
@@ -68,6 +103,7 @@ public class SobaController {
     public ModelAndView login(@RequestParam(value = "error", required = false) 
             String error, @RequestParam(value = "logout", required = false) String logout) {
         ModelAndView model = new ModelAndView(); 
+        
         if (error != null) { model.addObject("error", "Losi login podaci!"); }
         if (logout != null) { model.addObject("msg", "Izlogovani ste."); } 
         model.setViewName("login");
